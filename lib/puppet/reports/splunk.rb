@@ -3,6 +3,7 @@ require 'yaml'
 require 'rubygems'
 require 'json'
 require 'rest-client'
+require 'uri'
 
 unless Puppet.version >= '2.6.5'
   fail "This report processor requires Puppet version 2.6.5 or later"
