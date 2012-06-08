@@ -1,7 +1,6 @@
 puppet-splunk
 =============
 
-<<<<<<< HEAD
 Description
 -----------
 
@@ -67,6 +66,3 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
-=======
-A Puppet report handler for sending logs, events and metrics to Splunk.
->>>>>>> aade7b22aec3e51ce01b3a6217993fe0e6b907a4
