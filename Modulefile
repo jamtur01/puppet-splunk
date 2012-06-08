@@ -1,0 +1,5 @@
+name 'puppet-splunk'
+version '0.0.1'
+license 'Apache 2.0'
+summary 'Report processor that sends logs and metrics as events to a Splunk server'
+project_page 'https://github.com/jamtur01/puppet-splunk'

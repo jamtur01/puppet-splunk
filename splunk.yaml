@@ -1,0 +1,5 @@
+---
+:server: 'https://splunk.example.com:8089'
+:user: 'user'
+:password: 'password'
+:index: 'main'
