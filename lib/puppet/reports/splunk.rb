@@ -27,7 +27,7 @@ Puppet::Reports.register_report(:splunk) do
     end
 
     @host = self.host
-    @failed = true unless self.status != 'failed'
+    self.status == 'failed' ? @failed = true : @failed = false
     @start_time = self.logs.first.time
     @elapsed_time = metrics["time"]["total"]
 
