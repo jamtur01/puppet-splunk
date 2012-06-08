@@ -27,24 +27,12 @@ Puppet::Reports.register_report(:splunk) do
     end
 
     @host = self.host
+    @failed = true unless self.status != 'failed'
+    @start_time = self.logs.first.time
+    @elapsed_time = metrics["time"]["total"]
 
-    send_logs(output)
-    send_metrics(self.metrics)
-    if self.status == 'failed'
-      send_failed
-    end
-  end
-
-  def send_logs(output)
-    metadata = {
-      :sourcetype => 'json_puppet-logs',
-      :source => 'puppet',
-      :host => @host,
-      :index => CONFIG[:index]
-    }
-    event = output.to_json
-
-    splunk_post(event, metadata)
+    #send_metrics(self.metrics)
+    send_event(output)
   end
 
   def send_metrics(metrics)
@@ -64,12 +52,13 @@ Puppet::Reports.register_report(:splunk) do
           unit = 'Count'
         end
         value = val[2]
+        puts name,unit,value
       }
     }
     splunk_post(event, metadata)
   end
 
-  def send_failed
+  def send_event(output)
     metadata = {
           :sourcetype => 'json',
           :source => 'puppet',
@@ -78,11 +67,11 @@ Puppet::Reports.register_report(:splunk) do
     }
 
     event = {
-      :failed => true,
-      :start_time => "",
-      :end_time => "",
-      :elapsed_time => "",
-      :exception => ""}.to_json
+      :failed => @failed,
+      :start_time => @start_time,
+      :end_time => Time.now,
+      :elapsed_time => @elapsed_time,
+      :exception => output}.to_json
 
     splunk_post(event, metadata)
   end
