@@ -27,8 +27,8 @@ Puppet::Reports.register_report(:splunk) do
 
     @host = self.host
 
-    send_logs(output,self.host)
-    send_metrics(self.metrics,self.host)
+    send_logs(output)
+    send_metrics(self.metrics)
     if self.status == 'failed'
       send_failed
     end
