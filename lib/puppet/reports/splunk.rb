@@ -82,7 +82,7 @@ Puppet::Reports.register_report(:splunk) do
     endpoint_path = [API_ENDPOINT, url_params].join('?')
 
     request = RestClient::Resource.new(
-      CONFIG[:splunk_url], :user => CONFIG[:user], :password => CONFIG[:password]
+      CONFIG[:server], :user => CONFIG[:user], :password => CONFIG[:password]
     )
 
     request[endpoint_path].post(event)
